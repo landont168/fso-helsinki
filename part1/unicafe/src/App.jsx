@@ -34,25 +34,9 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  const [all, setAll] = useState(0);
-
-  // button event handlers
-  const handleGoodClick = () => {
-    setAll(all + 1);
-    setGood(good + 1);
-  };
-
-  const handleNeutralClick = () => {
-    setAll(all + 1);
-    setNeutral(neutral + 1);
-  };
-
-  const handleBadClick = () => {
-    setAll(all + 1);
-    setBad(bad + 1);
-  };
 
   // object to compute/store statistics as prop to components
+  const all = good + neutral + bad;
   const statistics = {
     good: good,
     neutral: neutral,
@@ -65,9 +49,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <Button handleClick={handleGoodClick} text="good" />
-      <Button handleClick={handleNeutralClick} text="neutral" />
-      <Button handleClick={handleBadClick} text="bad" />
+      <Button handleClick={() => setGood(good + 1)} text="good" />
+      <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
+      <Button handleClick={() => setBad(bad + 1)} text="bad" />
       <h1>statistics</h1>
       <Statistics statistics={statistics} />
     </div>

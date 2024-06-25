@@ -37,20 +37,20 @@ const App = () => {
     setSelected(getRandomInt(0, length - 1));
   };
 
-  // update votes state array
   const updateVotes = () => {
+    // return index of highest votes within array
+    const getMaxIndex = (arr, curIndex, maxIndex) => {
+      if (arr[curIndex] > arr[maxIndex]) {
+        return curIndex;
+      }
+      return maxIndex;
+    };
+
+    // update votes state array
     const copyVotes = [...votes];
     copyVotes[selected] += 1;
     setVotes(copyVotes);
     setMaxIndex(getMaxIndex(copyVotes, selected, maxIndex));
-  };
-
-  // return index of highest votes within array
-  const getMaxIndex = (arr, curIndex, maxIndex) => {
-    if (arr[curIndex] > arr[maxIndex]) {
-      return curIndex;
-    }
-    return maxIndex;
   };
 
   return (

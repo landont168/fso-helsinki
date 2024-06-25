@@ -36,6 +36,7 @@ const App = () => {
   const [bad, setBad] = useState(0);
   const [all, setAll] = useState(0);
 
+  // button event handlers
   const handleGoodClick = () => {
     setAll(all + 1);
     setGood(good + 1);

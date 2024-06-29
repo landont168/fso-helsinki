@@ -1,35 +1,68 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
+// components
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import personService from "./services/persons";
 
 const App = () => {
-  // states
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456", id: 1 },
-    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
-    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
-    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
-  ]);
+  // initial states
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
 
-  // add new person to state
+  // effect hook to fetch data from server on initial render
+  useEffect(() => {
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  }, []);
+
+  // add/update person to state/server
   const addPerson = (event) => {
     event.preventDefault();
-    const personExists = persons.find((person) => person.name === newName);
-    if (personExists) {
-      alert(`${newName} is already added to phonebook`);
+    const existingPerson = persons.find((person) => person.name === newName);
+    if (existingPerson) {
+      updatePerson(existingPerson);
     } else {
       const personObject = {
         name: newName,
         number: newNumber,
       };
-      setPersons(persons.concat(personObject));
-      setNewName("");
-      setNewNumber("");
+      personService.create(personObject).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNewName("");
+        setNewNumber("");
+      });
+    }
+  };
+
+  // delete person from state/erver
+  const deletePerson = (id, name) => {
+    if (window.confirm(`Delete ${name} ?`)) {
+      personService.deleteObject(id).then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      });
+    }
+  };
+
+  // update number for person from state + servr
+  const updatePerson = (person) => {
+    if (
+      window.confirm(
+        `${newName} is already added to phonebook, replace the older number with a new one?`
+      )
+    ) {
+      const updatedPerson = { ...person, number: newNumber };
+      personService.update(person.id, updatedPerson).then((returnedPerson) => {
+        setPersons(
+          persons.map((p) => (p.id !== person.id ? p : returnedPerson))
+        );
+        setNewName("");
+        setNewNumber("");
+      });
     }
   };
 
@@ -66,7 +99,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h3>Numbers</h3>
-      <Persons persons={filterPersons(newFilter)} />
+      <Persons persons={filterPersons(newFilter)} deletePerson={deletePerson} />
     </div>
   );
 };

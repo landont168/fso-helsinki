@@ -4,7 +4,7 @@
 
 - `components` - independent and reusuable building blocks of a web app
 - `props` - arguements passed into components
-- `useState` - hook that lets you to add a state variable to component
+- `useState` - hook that allows you to add a state variable to a component; to manage and store data that changes over time
 
 ## Part 2 - Communicating with server
 

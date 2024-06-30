@@ -53,11 +53,16 @@ const App = () => {
     if (window.confirm(`Delete ${name} ?`)) {
       personService.deleteObject(id).then(() => {
         setPersons(persons.filter((person) => person.id !== id));
+        setNotificationMessage(`Deleted ${name}`);
+        setNotificationType("message");
+        setTimeout(() => {
+          setNotificationMessage(null);
+        }, 5000);
       });
     }
   };
 
-  // update number for person from state + servr
+  // update number for person from state/server
   const updatePerson = (person) => {
     if (
       window.confirm(

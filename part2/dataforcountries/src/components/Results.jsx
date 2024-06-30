@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
+const KELVIN = 273.15;
 
 const Results = ({ country, countries }) => {
   if (!country) {
     return null;
   }
 
-  // function to filter countries based on searchquery
+  // function to filter countries based on search query
   const filterCountries = () => {
     return countries.filter((c) =>
       c.name.common.toLowerCase().includes(country.toLowerCase())
@@ -62,19 +63,15 @@ const Country = ({ country, handleSelectedCountry }) => {
 const CountryDisplay = ({ country }) => {
   const [weatherData, setWeatherData] = useState(null);
 
-  console.log("display", country.name.common);
-
-  // function to fetch weather data
-
-  // use effect hook to fetch temperature data
+  // effect hook to fetch temperature data for country
   useEffect(() => {
-    console.log("fetch");
     const getWeatherData = () => {
       const request = axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${country.capital[0]}&appid=${API_KEY}`
       );
       return request.then((response) => response.data);
     };
+
     // only fetch data when country changes
     getWeatherData().then((weatherDataResults) => {
       setWeatherData(weatherDataResults);
@@ -100,7 +97,9 @@ const CountryDisplay = ({ country }) => {
       </ul>
       <img src={country.flags.png} />
       <h2>Weather in {country.capital}</h2>
-      <div>temperature {`${weatherData.main.temp} Celcius`}</div>
+      <div>
+        temperature {`${(weatherData.main.temp - KELVIN).toFixed(2)} Celcius`}
+      </div>
       <img
         src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
       />

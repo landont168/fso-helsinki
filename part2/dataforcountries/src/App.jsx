@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// components
 import SearchBar from "./components/SearchBar";
 import Results from "./components/Results";
 
 const COUNTRIES_URL = "https://studies.cs.helsinki.fi/restcountries/api/all";
 
 const App = () => {
-  // component states
+  // app component states
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([]);
 

@@ -8,5 +8,5 @@
 
 ## Part 2 - Communicating with server
 
-- `useEffect` - hook that allows you to synchronize a c omponent with an external system (ex. fetch data from server); executed after the initial render
+- `useEffect` - hook that allows you to synchronize a component with an external system (ex. fetch data from server); executed after the initial render
 - `promise` - object that represents the eventual completion or failure of an asychronous operation (ex. pending, fulfulled, rejected)

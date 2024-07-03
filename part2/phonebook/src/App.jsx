@@ -35,16 +35,23 @@ const App = () => {
         name: newName,
         number: newNumber,
       };
-      personService.create(personObject).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setNotificationMessage(`Added ${newName}`);
-        setNotificationType("message");
-        setNewName("");
-        setNewNumber("");
-        setTimeout(() => {
-          setNotificationMessage(null);
-        }, 5000);
-      });
+      personService
+        .create(personObject)
+        .then((returnedPerson) => {
+          // update persons state after sending object to backend/db
+          setPersons(persons.concat(returnedPerson));
+          setNotificationMessage(`Added ${newName}`);
+          setNotificationType("message");
+        })
+        .catch((error) => {
+          setNotificationMessage(error.response.data.error);
+          setNotificationType("error");
+        });
+      setNewName("");
+      setNewNumber("");
+      setTimeout(() => {
+        setNotificationMessage(null);
+      }, 5000);
     }
   };
 

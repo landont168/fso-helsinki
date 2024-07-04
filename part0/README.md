@@ -1,7 +1,5 @@
 ## Part 0 - Fundamentals of web apps
 
-**Exercises**
-
 - 0.1 - HTML
 - 0.2 - CSS
 - 0.3 - HTML forms

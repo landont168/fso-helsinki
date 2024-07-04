@@ -1,6 +1,7 @@
 ## Part 3 - Programming a server with NodeJS and Express
 
 `phonebook-backend`
+
 - 3.1 - implement Node app that returns entries at http://localhost:3001/api/persons upon `GET` request
 - 3.2 - display info at http://localhost:3001/info upon `GET` request
 - 3.3 - display info for single entry at upon `GET` request
@@ -23,23 +24,3 @@
 - 3.20 - configure custom validator in `mongoose` for data validation
 - 3.21 - deploy database backend to production
 - 3.22 - add `ESlint` to app and fix warnings
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Implement error handling for creating new entries. The request is not allowed to succeed, if:
-
-Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be http://localhost:3001/api/persons/5

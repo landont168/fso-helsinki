@@ -13,6 +13,7 @@
 
 ## Part 3 - Programming a server with NodeJS and Express
 
+- `NodeJS` - JavaScript runtime based on Google's Chrome V8 JavaScript engine
 - `Express` - server-side development library used with Node
 - `REST APIs` - allows frontend to interact with backend by sending HTTP requests (ex. `GET`, `POST`, `PUT`, `DELETE`) and receiving HTTP responses (typically in `JSON` format)
 - `middleware` - intermediary functions that can process `request` objects before they reach the backend or `response` objects before they reach the client (ex. `json-parser` to parse JSON to JS objects, `CORS` to enable cross-origin requests, user authentication, logging, error handling)

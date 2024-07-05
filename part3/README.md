@@ -4,7 +4,7 @@
 
 - 3.1 - implement Node app that returns entries at http://localhost:3001/api/persons upon `GET` request
 - 3.2 - display info at http://localhost:3001/info upon `GET` request
-- 3.3 - display info for single entry at upon `GET` request
+- 3.3 - display info for single entry upon `GET` request
 - 3.4 - delete entries from server upon `DELETE` request
 - 3.5 - add entries to server upon `POST` request
 - 3.6 - implement error handling for creating new entries

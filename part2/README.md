@@ -16,12 +16,12 @@
 - 2.9 - implement search field that filters for a person's name by using another state variable
 - 2.10 - refactor app into separate components
 - 2.11 - fetch initial state of data from `db.json` with the `useEffect` hook
-- 2.12 - save entries to backend server via `POST` request
+- 2.12 - save entries to backend server upon `POST` request
 - 2.13 - extract communication with backend into its own module
-- 2.14 - delete entries from backend server via `DELETE` request
-- 2.15 - update number for existing user via `PUT` request
+- 2.14 - delete entries from backend server upon `DELETE` request
+- 2.15 - update number for existing user upon `PUT` request
 - 2.16 - add successful notification message with component after successful `POST` request
-- 2.17 - handle updating number of deleted user by handling promises/errors
+- 2.17 - handle updating the phone number of deleted user by handling promises/errors
 
 `countries`
 

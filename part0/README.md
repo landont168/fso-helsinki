@@ -1,4 +1,4 @@
-## Part 0 - Fundamentals of web apps
+# Part 0 - Fundamentals of web apps
 
 - 0.1 - HTML
 - 0.2 - CSS

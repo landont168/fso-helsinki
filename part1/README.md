@@ -1,4 +1,4 @@
-## Part 1 - Introduction to React
+# Part 1 - Introduction to React
 
 `courseinfo`
 
@@ -21,4 +21,4 @@
 
 - 1.12 - display random anecdote upon button click
 - 1.13 - store votes of each anecdote in component's state
-- 1.14 - display most popular anecdote by tracking highest voted anecdote in component's state
+- 1.14 - display most popular anecdote by tracking highest voted anecdote in state variable

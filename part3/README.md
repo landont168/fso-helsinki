@@ -20,7 +20,7 @@
 - 3.16 - move error handling of app to error handler middleware
 - 3.17 - update entry from database upon `PUT` request
 - 3.18 - update other routes to use database
-- 3.19 - apply validation functionality in `mongoose` to handle `POST` and `PUT` requests for entries
-- 3.20 - configure custom validator in `mongoose` for data validation
+- 3.19 - apply validation functionality with `mongoose` to handle `POST` and `PUT` requests for entries
+- 3.20 - configure custom validator with `mongoose` for data validation
 - 3.21 - deploy database backend to production
 - 3.22 - add `ESlint` to app and fix warnings

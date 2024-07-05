@@ -21,7 +21,7 @@
 - 2.14 - delete entries from backend server upon `DELETE` request
 - 2.15 - update number for existing user upon `PUT` request
 - 2.16 - add successful notification message with component after successful `POST` request
-- 2.17 - handle updating the phone number of deleted user by handling promises/errors
+- 2.17 - handle updating the phone number of deleted user by handling promises and errors
 
 `countries`
 

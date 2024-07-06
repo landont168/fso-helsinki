@@ -76,6 +76,7 @@ test("dummy returns one", () => {
   assert.strictEqual(dummy([]), 1)
 })
 
+// TOTAL LIKES
 describe("total likes", () => {
   test("of empty list is zero", () => {
     assert.strictEqual(totalLikes([]), 0)
@@ -90,6 +91,7 @@ describe("total likes", () => {
   })
 })
 
+// FAVOURITE BLOG
 describe("favorite blog", () => {
   test("of empty list is zero", () => {
     assert.deepStrictEqual(favoriteBlog([]), null)
@@ -111,6 +113,7 @@ describe("favorite blog", () => {
   })
 })
 
+// AUTHOR WITH MOST BLOGS
 describe("most blogs", () => {
   test("of empty list is null", () => {
     assert.deepStrictEqual(mostBlogs([]), null)
@@ -131,6 +134,7 @@ describe("most blogs", () => {
   })
 })
 
+// AUTHOR WITH MOST LIKES
 describe("most likes", () => {
   test("of empty list is null", () => {
     assert.deepStrictEqual(mostLikes([]), null)

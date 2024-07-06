@@ -4,22 +4,15 @@ const dummy = (blogs) => {
 
 // return total sum of likes in all blogs posts
 const totalLikes = (blogs) => {
-  const reducer = (sum, blog) => {
-    return sum + blog.likes
-  }
-
-  return blogs.reduce(reducer, 0)
+  return blogs.reduce((sum, blog) => sum + blog.likes, 0)
 }
 
 // return blog with most likes
 const favoriteBlog = (blogs) => {
-  // empty blogs array
   if (blogs.length === 0) {
     return null
   }
-
-  const blog = blogs.reduce((a, b) => (a.likes > b.likes ? a : b))
-  return blog
+  return blogs.reduce((a, b) => (a.likes > b.likes ? a : b))
 }
 
 // returns author with most blogs
@@ -28,13 +21,13 @@ const mostBlogs = (blogs) => {
     return null
   }
 
-  // set up author count
+  // set up author-blogs count
   const authorCount = {}
   blogs.forEach((blog) => {
     authorCount[blog.author] = (authorCount[blog.author] || 0) + 1
   })
 
-  // find top author
+  // find top author name
   const topAuthor = Object.keys(authorCount).reduce((a, b) =>
     authorCount[a] > authorCount[b] ? a : b
   )
@@ -52,8 +45,9 @@ const mostLikes = (blogs) => {
     return null
   }
 
-  // get most likes author and determine likes
+  // get author with most liked blog
   const mostLikedAuthor = favoriteBlog(blogs).author
+  // calculate total likes for author
   const likes = blogs
     .filter((blog) => blog.author === mostLikedAuthor)
     .reduce((sum, blog) => sum + blog.likes, 0)

@@ -98,6 +98,23 @@ describe("when there is initially some notes saved", () => {
       assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
     })
   })
+
+  describe("deletion of a blog", () => {
+    test("succeeds with status code 204 if id is valid", async () => {
+      // get blog to delete
+      const blogsAtStart = await helper.blogsInDb()
+      const blogToDelete = blogsAtStart[0]
+
+      await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204)
+
+      // verify that blog was removed from db
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length - 1)
+
+      const titles = blogsAtEnd.map((blog) => blog.title)
+      assert(!titles.includes(blogToDelete.title))
+    })
+  })
 })
 
 // close db connection at the end

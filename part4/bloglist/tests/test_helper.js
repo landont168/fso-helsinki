@@ -16,15 +16,6 @@ const initialBlogs = [
   },
 ]
 
-// creates a non-existent id
-const nonExistingId = async () => {
-  const blog = new Blog({ content: "willremovethissoon" })
-  await blog.save()
-  await blog.deleteOne()
-
-  return blog._id.toString()
-}
-
 // retrives blogs in JSON from db
 const blogsInDb = async () => {
   const blogs = await Blog.find({})
@@ -33,6 +24,5 @@ const blogsInDb = async () => {
 
 module.exports = {
   initialBlogs,
-  nonExistingId,
   blogsInDb,
 }

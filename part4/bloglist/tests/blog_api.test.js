@@ -115,6 +115,32 @@ describe("when there is initially some notes saved", () => {
       assert(!titles.includes(blogToDelete.title))
     })
   })
+
+  describe("update a blog", () => {
+    test("succeeds with valid data", async () => {
+      const blogsAtStart = await helper.blogsInDb()
+      const blogToUpdate = blogsAtStart[0]
+
+      // set up updated blog
+      const updatedBlog = {
+        ...blogToUpdate,
+        likes: 420,
+      }
+
+      await api
+        .put(`/api/blogs/${blogToUpdate.id}`)
+        .send(updatedBlog)
+        .expect(200)
+        .expect("Content-Type", /application\/json/)
+
+      // verify that blog was updated in db
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
+
+      const updatedBlogInDb = await api.get(`/api/blogs/${blogToUpdate.id}`)
+      assert.strictEqual(updatedBlogInDb.body.likes, 420)
+    })
+  })
 })
 
 // close db connection at the end

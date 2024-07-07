@@ -4,12 +4,8 @@ const mongoose = require("mongoose")
 const supertest = require("supertest")
 const app = require("../app")
 const api = supertest(app)
-
 const helper = require("./test_helper")
-
 const Blog = require("../models/blog")
-
-// reset database before every test
 
 describe("when there is initially some notes saved", () => {
   // reset db before every test
@@ -19,14 +15,13 @@ describe("when there is initially some notes saved", () => {
   })
 
   describe("test HTTP GET requests", () => {
-    // returns blogs in JSON format
     test("blogs are returned as json", async () => {
       await api
         .get("/api/blogs")
         .expect(200)
         .expect("Content-Type", /application\/json/)
     })
-    // returns the correct amount of blogs
+
     test("all blogs are returned", async () => {
       const response = await api.get("/api/blogs")
       assert.strictEqual(response.body.length, helper.initialBlogs.length)
@@ -36,7 +31,6 @@ describe("when there is initially some notes saved", () => {
   test("unique identifier property of blog posts is named id", async () => {
     const response = await api.get("/api/blogs")
 
-    // check all blogs have id property
     response.body.forEach((blog) => {
       assert.ok(blog.id)
       assert.ok(!blog._id)
@@ -44,7 +38,6 @@ describe("when there is initially some notes saved", () => {
   })
 
   describe("test HTTP POST requests", () => {
-    // verify total number of blogs and content
     test("succeeds with valid data", async () => {
       const newBlog = {
         title: "light path 8",
@@ -59,6 +52,7 @@ describe("when there is initially some notes saved", () => {
         .expect(201)
         .expect("Content-Type", /application\/json/)
 
+      // verify that blog was added to db
       const blogsAtEnd = await helper.blogsInDb()
       assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
@@ -91,7 +85,7 @@ describe("when there is initially some notes saved", () => {
       const blogsAtEnd = await helper.blogsInDb()
       assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
     })
-    
+
     test("responds with status code 400 if url property missing", async () => {
       const newBlog = {
         title: "utopia",

@@ -65,6 +65,44 @@ describe("when there is initially some notes saved", () => {
       const titles = blogsAtEnd.map((blog) => blog.title)
       assert(titles.includes(newBlog.title))
     })
+
+    test("verifies that likes property defaults to zero if missing in request", async () => {
+      const newBlog = {
+        title: "heroes and villians",
+        author: "metro",
+        url: "metro.com",
+      }
+
+      const response = await api.post("/api/blogs").send(newBlog).expect(201)
+      assert.strictEqual(response.body.likes, 0)
+
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
+    })
+
+    test("responds with status code 400 if title property missing", async () => {
+      const newBlog = {
+        author: "drake",
+        url: "drake.com",
+        likes: 21,
+      }
+
+      await api.post("/api/blogs").send(newBlog).expect(400)
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
+    })
+    
+    test("responds with status code 400 if url property missing", async () => {
+      const newBlog = {
+        title: "utopia",
+        author: "travis",
+        likes: 214,
+      }
+
+      await api.post("/api/blogs").send(newBlog).expect(400)
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
+    })
   })
 })
 

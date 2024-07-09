@@ -18,4 +18,4 @@
 - 4.14 - handle and test `PUT` requests for a single blog post resource
 - 4.15 - create users upon `POST` request (with `bcrypt` to hash passwords) and display users upon `GET` requests to api/users
 - 4.16 - add and test username and password restrictions with Mongoose and controller validators
-- 4.17 - modify schema of `Blog` to display user information and schema of `User` to display blogs created
+- 4.17 - modify schema of `Blog` to display user information and schema of `User` to display blogs created (using `populate` method)

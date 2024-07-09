@@ -10,7 +10,7 @@ usersRouter.get("/", async (request, response) => {
 usersRouter.post("/", async (request, response) => {
   const { username, name, password } = request.body
 
-  // verify password given
+  // verify length of password given
   if (!password || password.length < 3) {
     return response
       .status(400)

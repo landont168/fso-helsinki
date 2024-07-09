@@ -1,7 +1,7 @@
 {
   "name": "bloglist",
   "version": "1.0.0",
-  "description": "## Part 1 - Introduction to React",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",

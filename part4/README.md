@@ -19,3 +19,8 @@
 - 4.15 - create users upon `POST` request (with `bcrypt` to hash passwords) and display users upon `GET` requests to api/users
 - 4.16 - add and test username and password restrictions with Mongoose and controller validators
 - 4.17 - modify schema of `Blog` to display user information and schema of `User` to display blogs created (using `populate` method)
+- 4.18 - implement token-based authentification (login) using `jsonwebtoken` upon `POST` requests to api/login
+- 4.19 - modify adding blogs so that it's only possible if a valid token is sent with the `POST` request
+- 4.20 - refactor extracting token from Authorization header to a middleware function
+- 4.21 - modify deleting blogs so that it can only be deleted by the user who created it
+- 4.22 - create middleware that extracts user from database based on decoded token; register middleware only for `POST` and `DELETE` requests which actually requires the token to identify the user requesting the operation

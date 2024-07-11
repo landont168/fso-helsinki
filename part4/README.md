@@ -24,4 +24,4 @@
 - 4.20 - refactor extracting token from Authorization header to a middleware function
 - 4.21 - modify deleting blogs so that it can only be deleted by the user who created it
 - 4.22 - create middleware that extracts user from database based on decoded token; register middleware only for `POST` and `DELETE` requests which actually requires the token to identify the user requesting the operation
-- 4.23 - fix unit tests to feature token-based authentification for adding/deleting blogs
+- 4.23 - fix unit tests to feature token-based authentication for adding/deleting blogs

@@ -12,7 +12,6 @@ const blogSchema = new mongoose.Schema({
   },
 })
 
-// reformat json
 blogSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
@@ -21,5 +20,4 @@ blogSchema.set("toJSON", {
   },
 })
 
-// export blog model
 module.exports = mongoose.model("Blog", blogSchema)

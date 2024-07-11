@@ -25,13 +25,13 @@ mongoose
     logger.error("error connecting to MongoDB:", error.message)
   })
 
-// use middleware
+// middleware
 app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 
-// mount routers
+// routers
 app.use("/api/login", loginRouter)
 app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)

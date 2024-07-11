@@ -38,7 +38,7 @@ const errorHandler = (error, request, response, next) => {
 }
 
 const tokenExtractor = (request, response, next) => {
-  // extracts token from auth header and assign to request token field
+  // extracts token from auth header
   const authorization = request.get("authorization")
   if (authorization && authorization.startsWith("Bearer ")) {
     request.token = authorization.replace("Bearer ", "")
@@ -46,7 +46,6 @@ const tokenExtractor = (request, response, next) => {
   next()
 }
 
-// finds user based on token and sets it to request object
 const userExtractor = async (request, response, next) => {
   // verify and decode token to user
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
@@ -54,7 +53,7 @@ const userExtractor = async (request, response, next) => {
     return response.status(401).json({ error: "token invalid" })
   }
 
-  // find user from db based on id
+  // find user from db based on user ID of token
   const user = await User.findById(decodedToken.id)
   request.user = user
   next()

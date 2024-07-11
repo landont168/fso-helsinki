@@ -2,12 +2,13 @@ const middleware = require("../utils/middleware")
 const blogsRouter = require("express").Router()
 const Blog = require("../models/blog")
 
-// routes
+// GET BLOGS
 blogsRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({}).populate("user", { username: 1, name: 1 })
   response.json(blogs)
 })
 
+// CREATE A BLOG
 blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
   const body = request.body
   const user = request.user
@@ -17,7 +18,6 @@ blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
     return response.status(400).send({ error: "missing title or url" })
   }
 
-  // defaults likes to 0 if likes missing from request
   const blog = new Blog({
     title: body.title,
     author: body.author,
@@ -35,6 +35,7 @@ blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
   response.status(201).json(savedBlog)
 })
 
+// GET BLOG BY ID
 blogsRouter.get("/:id", async (request, response) => {
   const blog = await Blog.findById(request.params.id)
   if (blog) {
@@ -44,13 +45,14 @@ blogsRouter.get("/:id", async (request, response) => {
   }
 })
 
+// DELETE BLOG
 blogsRouter.delete(
   "/:id",
   middleware.userExtractor,
   async (request, response) => {
     const user = request.user
 
-    // find existing blog based on ID of DELETE request
+    // find existing blog based on blog ID
     const blog = await Blog.findById(request.params.id)
     if (!blog) {
       return response.status(404).json({ error: "blog not found" })
@@ -67,9 +69,9 @@ blogsRouter.delete(
   }
 )
 
+// UPDATE BLOG
 blogsRouter.put("/:id", async (request, response) => {
   const body = request.body
-
   const blog = {
     title: body.title,
     author: body.author,
@@ -83,5 +85,4 @@ blogsRouter.put("/:id", async (request, response) => {
   response.json(updatedBlog)
 })
 
-// export router
 module.exports = blogsRouter

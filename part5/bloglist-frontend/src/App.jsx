@@ -10,18 +10,28 @@ const App = () => {
   const [password, setPassword] = useState("")
   const [user, setUser] = useState(null)
 
-  // fetch blogs from server
+  // fetch blogs from server on initial render
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs))
+  }, [])
+
+  // uses local storage to check if user already logged in
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser")
+    if (loggedUserJSON) {
+      console.log("user logged in already")
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+    }
   }, [])
 
   // event handler for login form
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log("logging in with", username, password)
     try {
-      // successful login
+      // save user to local storage
       const user = await loginService.login({ username, password })
+      window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user))
       setUser(user)
       setUsername("")
       setPassword("")
@@ -30,18 +40,36 @@ const App = () => {
     }
   }
 
+  // event handler to handle updated username
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value)
+  }
+
+  // event handler to handle updated password
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value)
+  }
+
+  // reset user state and local storage when user logs out
+  const handleLogout = () => {
+    window.localStorage.removeItem("loggedBlogAppUser")
+    setUser(null)
+  }
+
   return (
     <div>
       {user === null && (
         <Login
           handleLogin={handleLogin}
           username={username}
-          setUsername={setUsername}
+          handleUsernameChange={handleUsernameChange}
           password={password}
-          setPassword={setPassword}
+          handlePasswordChange={handlePasswordChange}
         />
       )}
-      {user !== null && <Blogs blogs={blogs} name={user.name} />}
+      {user !== null && (
+        <Blogs blogs={blogs} name={user.name} handleLogout={handleLogout} />
+      )}
     </div>
   )
 }

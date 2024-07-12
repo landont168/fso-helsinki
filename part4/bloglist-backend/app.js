@@ -13,6 +13,7 @@ const logger = require("./utils/logger")
 const middleware = require("./utils/middleware")
 const mongoose = require("mongoose")
 
+mongoose.set("strictQuery", false)
 logger.info("connecting to", config.MONGODB_URI)
 
 // connect to db

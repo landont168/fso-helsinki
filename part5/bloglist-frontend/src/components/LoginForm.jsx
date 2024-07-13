@@ -1,4 +1,4 @@
-const Login = ({
+const LoginForm = ({
   handleLogin,
   username,
   handleUsernameChange,
@@ -6,7 +6,6 @@ const Login = ({
   handlePasswordChange,
 }) => (
   <form onSubmit={handleLogin}>
-    <h2>log in to application</h2>
     <div>
       username
       <input
@@ -29,4 +28,4 @@ const Login = ({
   </form>
 )
 
-export default Login
+export default LoginForm

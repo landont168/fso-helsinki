@@ -1,5 +1,7 @@
-const Logout = ({ handleLogout }) => (
-  <button onClick={handleLogout}>logout</button>
+const Logout = ({ name, handleLogout }) => (
+  <div>
+    {name} logged in <button onClick={handleLogout}>logout</button>
+  </div>
 )
 
 export default Logout

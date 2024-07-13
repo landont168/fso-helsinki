@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
+import "./index.css"
 import Blogs from "./components/Blogs"
 import BlogForm from "./components/BlogForm"
-import Login from "./components/Login"
+import LoginForm from "./components/LoginForm"
 import Logout from "./components/Logout"
+import Notification from "./components/Notification"
 import blogService from "./services/blogs"
 import loginService from "./services/login"
 
@@ -18,6 +20,10 @@ const App = () => {
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [url, setUrl] = useState("")
+
+  // notification message
+  const [notification, setNotification] = useState(null)
+  const [notificationType, setNotificationType] = useState("")
 
   // fetch blogs from server on initial render
   useEffect(() => {
@@ -45,10 +51,14 @@ const App = () => {
       blogService.setToken(user.token)
       setUsername("")
       setPassword("")
-      console.log("token added")
     } catch {
-      console.log("wrong credentials")
+      setNotification("wrong username or password")
+      setNotificationType("error")
     }
+    setTimeout(() => {
+      setNotification(null)
+      setNotificationType("")
+    }, 5000)
   }
 
   const handleNewBlog = async (event) => {
@@ -60,9 +70,16 @@ const App = () => {
       setTitle("")
       setAuthor("")
       setUrl("")
+      setNotification(`a new blog ${newBlog.title} by ${newBlog.author} added`)
+      setNotificationType("success")
     } catch {
-      console.log("error adding blog")
+      setNotification("error adding blog")
+      setNotificationType("error")
     }
+    setTimeout(() => {
+      setNotification(null)
+      setNotificationType("")
+    }, 5000)
   }
 
   // event handlers to update form values
@@ -89,22 +106,24 @@ const App = () => {
 
   if (user === null) {
     return (
-      <Login
-        handleLogin={handleLogin}
-        username={username}
-        handleUsernameChange={handleUsernameChange}
-        password={password}
-        handlePasswordChange={handlePasswordChange}
-      />
+      <div>
+        <h2>log in to application</h2>
+        <Notification notification={notification} type={notificationType} />
+        <LoginForm
+          handleLogin={handleLogin}
+          username={username}
+          handleUsernameChange={handleUsernameChange}
+          password={password}
+          handlePasswordChange={handlePasswordChange}
+        />
+      </div>
     )
   }
   return (
     <div>
       <h2>blogs</h2>
-      <div>
-        {user.name} logged in <Logout handleLogout={handleLogout} />
-      </div>
-      <br />
+      <Logout name={user.name} handleLogout={handleLogout} />
+      <Notification notification={notification} type={notificationType} />
       <BlogForm
         handleNewBlog={handleNewBlog}
         title={title}

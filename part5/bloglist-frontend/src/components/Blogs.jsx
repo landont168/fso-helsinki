@@ -1,14 +1,5 @@
-const Logout = ({ handleLogout }) => (
-  <button onClick={handleLogout}>logout</button>
-)
-
-const Blogs = ({ blogs, name, handleLogout }) => (
+const Blogs = ({ blogs }) => (
   <div>
-    <h2>blogs</h2>
-    <div>
-      {name} logged in <Logout handleLogout={handleLogout} />
-    </div>
-    <br />
     {blogs.map((blog) => (
       <Blog key={blog.id} blog={blog} />
     ))}
@@ -17,7 +8,7 @@ const Blogs = ({ blogs, name, handleLogout }) => (
 
 const Blog = ({ blog }) => (
   <div>
-    {blog.title} {blog.author}
+    {blog.title} - {blog.author}
   </div>
 )
 

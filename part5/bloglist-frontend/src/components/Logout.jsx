@@ -1,6 +1,6 @@
-const Logout = ({ name, handleLogout }) => (
+const Logout = ({ name, logoutUser }) => (
   <div>
-    {name} logged in <button onClick={handleLogout}>logout</button>
+    {name} logged in <button onClick={logoutUser}>logout</button>
   </div>
 )
 

@@ -28,9 +28,9 @@ const App = () => {
       setUser(user)
       blogService.setToken(user.token)
     }
-  }, []) 
+  }, [])
 
-  // acts as reference to Togglaable component
+  // creates persistent reference to Togglable component
   const blogFormRef = useRef()
 
   // create blog with backend service

@@ -1,14 +1,22 @@
 import { useState } from "react"
 
-const Blogs = ({ blogs, updateLikes }) => (
+const Blogs = ({ blogs, updateBlog, deleteBlog, user }) => (
   <div>
-    {blogs.map((blog) => (
-      <Blog key={blog.id} blog={blog} updateLikes={updateLikes} />
-    ))}
+    {blogs
+      .sort((a, b) => b.likes - a.likes)
+      .map((blog) => (
+        <Blog
+          key={blog.id}
+          blog={blog}
+          updateBlog={updateBlog}
+          deleteBlog={deleteBlog}
+          user={user}
+        />
+      ))}
   </div>
 )
 
-const Blog = ({ blog, updateLikes }) => {
+const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -26,7 +34,7 @@ const Blog = ({ blog, updateLikes }) => {
     setVisible(!visible)
   }
 
-  const handleLikeClick = () => {
+  const handleUpdateBlog = () => {
     console.log("updating blog...")
     const updatedBlog = {
       user: blog.user.id,
@@ -35,7 +43,14 @@ const Blog = ({ blog, updateLikes }) => {
       title: blog.title,
       url: blog.url,
     }
-    updateLikes(blog.id, updatedBlog)
+    updateBlog(blog.id, updatedBlog)
+  }
+
+  const handleDeleteBlog = () => {
+    console.log("deleting blog...")
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      deleteBlog(blog.id)
+    }
   }
 
   return (
@@ -50,9 +65,12 @@ const Blog = ({ blog, updateLikes }) => {
         <div>{blog.url}</div>
         <div>
           likes {blog.likes}
-          <button onClick={handleLikeClick}>like</button>
+          <button onClick={handleUpdateBlog}>like</button>
         </div>
         <div>{blog.user.name}</div>
+        {user.name === blog.user.name && (
+          <button onClick={handleDeleteBlog}>remove</button>
+        )}
       </div>
     </div>
   )

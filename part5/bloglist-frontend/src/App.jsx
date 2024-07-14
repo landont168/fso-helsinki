@@ -73,7 +73,7 @@ const App = () => {
     blogService.setToken(null)
   }
   // update likes for blog with backend service
-  const updateLikes = async (id, blogObject) => {
+  const updateBlog = async (id, blogObject) => {
     try {
       const updatedBlog = await blogService.update(id, blogObject)
       setBlogs(
@@ -81,6 +81,15 @@ const App = () => {
       )
     } catch {
       console.log("error updating blog")
+    }
+  }
+
+  const deleteBlog = async (id) => {
+    try {
+      await blogService.deleteObject(id)
+      setBlogs(blogs.filter((blog) => blog.id !== id))
+    } catch {
+      console.log("error deleting blog")
     }
   }
 
@@ -103,7 +112,12 @@ const App = () => {
       <Togglable buttonLabel="create new blog" ref={blogFormRef}>
         <BlogForm addBlog={addBlog} />
       </Togglable>
-      <Blogs blogs={blogs} updateLikes={updateLikes} />
+      <Blogs
+        blogs={blogs}
+        updateBlog={updateBlog}
+        deleteBlog={deleteBlog}
+        user={user}
+      />
     </div>
   )
 }

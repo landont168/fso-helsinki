@@ -1,14 +1,14 @@
 import { useState } from "react"
 
-const Blogs = ({ blogs }) => (
+const Blogs = ({ blogs, updateLikes }) => (
   <div>
     {blogs.map((blog) => (
-      <Blog key={blog.id} blog={blog} />
+      <Blog key={blog.id} blog={blog} updateLikes={updateLikes} />
     ))}
   </div>
 )
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, updateLikes }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -26,6 +26,18 @@ const Blog = ({ blog }) => {
     setVisible(!visible)
   }
 
+  const handleLikeClick = () => {
+    console.log("updating blog...")
+    const updatedBlog = {
+      user: blog.user.id,
+      likes: blog.likes + 1,
+      author: blog.author,
+      title: blog.title,
+      url: blog.url,
+    }
+    updateLikes(blog.id, updatedBlog)
+  }
+
   return (
     <div style={blogStyle}>
       <div style={hideWhenVisible}>
@@ -38,7 +50,7 @@ const Blog = ({ blog }) => {
         <div>{blog.url}</div>
         <div>
           likes {blog.likes}
-          <button>like</button>
+          <button onClick={handleLikeClick}>like</button>
         </div>
         <div>{blog.user.name}</div>
       </div>

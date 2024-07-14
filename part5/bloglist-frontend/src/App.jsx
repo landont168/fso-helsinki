@@ -72,6 +72,17 @@ const App = () => {
     setUser(null)
     blogService.setToken(null)
   }
+  // update likes for blog with backend service
+  const updateLikes = async (id, blogObject) => {
+    try {
+      const updatedBlog = await blogService.update(id, blogObject)
+      setBlogs(
+        blogs.map((blog) => (blog.id !== updatedBlog.id ? blog : updatedBlog))
+      )
+    } catch {
+      console.log("error updating blog")
+    }
+  }
 
   // user not logged in
   if (user === null) {
@@ -92,7 +103,7 @@ const App = () => {
       <Togglable buttonLabel="create new blog" ref={blogFormRef}>
         <BlogForm addBlog={addBlog} />
       </Togglable>
-      <Blogs blogs={blogs} />
+      <Blogs blogs={blogs} updateLikes={updateLikes} />
     </div>
   )
 }

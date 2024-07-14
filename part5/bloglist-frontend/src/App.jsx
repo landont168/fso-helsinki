@@ -1,19 +1,19 @@
-import "./index.css"
-import { useState, useEffect, useRef } from "react"
-import Blogs from "./components/Blogs"
-import BlogForm from "./components/BlogForm"
-import LoginForm from "./components/LoginForm"
-import Logout from "./components/Logout"
-import Togglable from "./components/Togglable"
-import Notification from "./components/Notification"
-import blogService from "./services/blogs"
-import loginService from "./services/login"
+import './index.css'
+import { useState, useEffect, useRef } from 'react'
+import Blogs from './components/Blogs'
+import BlogForm from './components/BlogForm'
+import LoginForm from './components/LoginForm'
+import Logout from './components/Logout'
+import Togglable from './components/Togglable'
+import Notification from './components/Notification'
+import blogService from './services/blogs'
+import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState(null)
-  const [notificationType, setNotificationType] = useState("")
+  const [notificationType, setNotificationType] = useState('')
 
   // fetch initial blogs from server
   useEffect(() => {
@@ -22,7 +22,7 @@ const App = () => {
 
   // restore user and token from local storage
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser")
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -40,13 +40,13 @@ const App = () => {
       const newBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(newBlog))
       setNotification(`a new blog ${newBlog.title} by ${newBlog.author} added`)
-      setNotificationType("success")
+      setNotificationType('success')
     } catch {
-      pass
+      console.log('error creating blog')
     }
     setTimeout(() => {
       setNotification(null)
-      setNotificationType("")
+      setNotificationType('')
     }, 5000)
   }
 
@@ -54,21 +54,21 @@ const App = () => {
   const loginUser = async (userObject) => {
     try {
       const user = await loginService.login(userObject)
-      window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user))
+      window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
       setUser(user)
       blogService.setToken(user.token)
     } catch {
-      setNotification("wrong username or password")
-      setNotificationType("error")
+      setNotification('wrong username or password')
+      setNotificationType('error')
     }
     setTimeout(() => {
       setNotification(null)
-      setNotificationType("")
+      setNotificationType('')
     }, 5000)
   }
 
   const logoutUser = () => {
-    window.localStorage.removeItem("loggedBlogAppUser")
+    window.localStorage.removeItem('loggedBlogAppUser')
     setUser(null)
     blogService.setToken(null)
   }
@@ -80,7 +80,7 @@ const App = () => {
         blogs.map((blog) => (blog.id !== updatedBlog.id ? blog : updatedBlog))
       )
     } catch {
-      console.log("error updating blog")
+      console.log('error updating blog')
     }
   }
 
@@ -89,7 +89,7 @@ const App = () => {
       await blogService.deleteObject(id)
       setBlogs(blogs.filter((blog) => blog.id !== id))
     } catch {
-      console.log("error deleting blog")
+      console.log('error deleting blog')
     }
   }
 

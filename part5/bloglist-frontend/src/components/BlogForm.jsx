@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 const BlogForm = ({ addBlog }) => {
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [url, setUrl] = useState("")
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
 
   // event handler for creating new blog
   const handleNewBlog = (event) => {
@@ -13,9 +13,9 @@ const BlogForm = ({ addBlog }) => {
       author,
       url,
     })
-    setTitle("")
-    setAuthor("")
-    setUrl("")
+    setTitle('')
+    setAuthor('')
+    setUrl('')
   }
 
   return (
@@ -25,31 +25,31 @@ const BlogForm = ({ addBlog }) => {
         <div>
           title:
           <input
-            type="text"
+            type='text'
             value={title}
-            name="Title"
+            name='Title'
             onChange={(event) => setTitle(event.target.value)}
           />
         </div>
         <div>
           author:
           <input
-            type="text"
+            type='text'
             value={author}
-            name="Author"
+            name='Author'
             onChange={(event) => setAuthor(event.target.value)}
           />
         </div>
         <div>
           url:
           <input
-            type="text"
+            type='text'
             value={url}
-            name="Url"
+            name='Url'
             onChange={(event) => setUrl(event.target.value)}
           />
         </div>
-        <button type="submit">create</button>
+        <button type='submit'>create</button>
       </form>
     </div>
   )

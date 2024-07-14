@@ -1,15 +1,15 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 const LoginForm = ({ loginUser }) => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   // login event handler
   const handleLogin = (event) => {
     event.preventDefault()
     loginUser({ username, password })
-    setUsername("")
-    setPassword("")
+    setUsername('')
+    setPassword('')
   }
 
   return (

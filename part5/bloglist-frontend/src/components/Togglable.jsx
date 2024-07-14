@@ -1,12 +1,13 @@
-import { useState, forwardRef, useImperativeHandle } from "react"
+import PropTypes from 'prop-types'
+import { useState, forwardRef, useImperativeHandle } from 'react'
 
 // allows Toggleable component to access ref assigned to it
 const Togglable = forwardRef((props, refs) => {
   const [visible, setVisible] = useState(false)
 
   // determine whether to show or hide form (props.children)
-  const hideWhenVisible = { display: visible ? "none" : "" }
-  const showWhenVisible = { display: visible ? "" : "none" }
+  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const showWhenVisible = { display: visible ? '' : 'none' }
 
   // toggle visibility upon button click
   const toggleVisibility = () => {
@@ -32,5 +33,11 @@ const Togglable = forwardRef((props, refs) => {
     </div>
   )
 })
+
+Togglable.propTypes = {
+  buttonLabel: PropTypes.string.isRequired,
+}
+
+Togglable.displayName = 'Togglable'
 
 export default Togglable

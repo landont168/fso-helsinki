@@ -3,7 +3,7 @@ const Notification = ({ notification, type }) => {
     return null
   }
 
-  if (type === "success") {
+  if (type === 'success') {
     return <div className="success">{notification}</div>
   }
   return <div className="error">{notification}</div>

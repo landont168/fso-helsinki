@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 const Blogs = ({ blogs, updateBlog, deleteBlog, user }) => (
   <div>
@@ -20,14 +20,14 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
-    border: "solid",
+    border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
   }
 
   const [visible, setVisible] = useState(false)
-  const hideWhenVisible = { display: visible ? "none" : "" }
-  const showWhenVisible = { display: visible ? "" : "none" }
+  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const showWhenVisible = { display: visible ? '' : 'none' }
 
   // toggle visibility upon button click
   const toggleVisibility = () => {
@@ -35,7 +35,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   }
 
   const handleUpdateBlog = () => {
-    console.log("updating blog...")
+    console.log('updating blog...')
     const updatedBlog = {
       user: blog.user.id,
       likes: blog.likes + 1,
@@ -47,7 +47,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   }
 
   const handleDeleteBlog = () => {
-    console.log("deleting blog...")
+    console.log('deleting blog...')
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
       deleteBlog(blog.id)
     }

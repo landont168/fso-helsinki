@@ -33,7 +33,6 @@ const App = () => {
   // creates persistent reference to Togglable component
   const blogFormRef = useRef()
 
-  // create blog with backend service
   const addBlog = async (blogObject) => {
     try {
       blogFormRef.current.toggleVisibility()
@@ -50,7 +49,6 @@ const App = () => {
     }, 5000)
   }
 
-  // login user with backend service
   const loginUser = async (userObject) => {
     try {
       const user = await loginService.login(userObject)
@@ -72,7 +70,7 @@ const App = () => {
     setUser(null)
     blogService.setToken(null)
   }
-  // update likes for blog with backend service
+
   const updateBlog = async (id, blogObject) => {
     try {
       const updatedBlog = await blogService.update(id, blogObject)
@@ -93,7 +91,6 @@ const App = () => {
     }
   }
 
-  // user not logged in
   if (user === null) {
     return (
       <div>
@@ -103,13 +100,12 @@ const App = () => {
     )
   }
 
-  // user logged in
   return (
     <div>
       <h2>blogs</h2>
       <Logout name={user.name} logoutUser={logoutUser} />
       <Notification notification={notification} type={notificationType} />
-      <Togglable buttonLabel="create new blog" ref={blogFormRef}>
+      <Togglable buttonLabel='create new blog' ref={blogFormRef}>
         <BlogForm addBlog={addBlog} />
       </Togglable>
       <Blogs

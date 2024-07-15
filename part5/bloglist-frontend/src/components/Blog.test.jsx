@@ -54,6 +54,6 @@ describe('Blog component', () => {
     await user.click(likeButton)
     await user.click(likeButton)
 
-    // expect(mockHandler.mock.calls).toHaveLength(2)
+    expect(mockHandler.mock.calls).toHaveLength(2)
   })
 })

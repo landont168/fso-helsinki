@@ -14,3 +14,7 @@
 - 5.10 - sort and display blog posts by likes
 - 5.11 - implement delete button functionality by making `DELETE` request to backend
 - 5.12 - add ESlint to project
+- 5.13 - test that Blog component renders title and author by default
+- 5.14 - test that Blog component renders URL and likes upon button click
+- 5.15 - test that mock event handler is called twice if like button clicked twice
+- 5.16 - test BlogForm component

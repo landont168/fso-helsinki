@@ -4,9 +4,9 @@ const Notification = ({ notification, type }) => {
   }
 
   if (type === 'success') {
-    return <div className="success">{notification}</div>
+    return <div className='success'>{notification}</div>
   }
-  return <div className="error">{notification}</div>
+  return <div className='error'>{notification}</div>
 }
 
 export default Notification

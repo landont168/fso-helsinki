@@ -8,18 +8,29 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', ({ username, password }) => {
+  // log in with username ans password
+  cy.request('POST', `${Cypress.env('BACKEND')}/login`, {
+    username,
+    password,
+  }).then(({ body }) => {
+    // save to local storage
+    localStorage.setItem('loggedBlogAppUser', JSON.stringify(body))
+    cy.visit('')
+  })
+})
+
+Cypress.Commands.add('createBlog', ({ title, author, url, likes }) => {
+  cy.request({
+    url: `${Cypress.env('BACKEND')}/blogs`,
+    method: 'POST',
+    body: { title, author, url, likes },
+    headers: {
+      Authorization: `Bearer ${
+        JSON.parse(localStorage.getItem('loggedBlogAppUser')).token
+      }`,
+    },
+  })
+  cy.visit('')
+})

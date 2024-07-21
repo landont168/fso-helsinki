@@ -1,4 +1,4 @@
-## Part 5 - Testing React apps
+# Part 5 - Testing React apps
 
 `bloglist-frontend`
 

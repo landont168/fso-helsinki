@@ -1,8 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 const AnecdoteList = () => {
-  // retrieve anecdotes from redux store
-  const anecdotes = useSelector((state) => state)
+  // retrieve filtered anecdotes from store
+  const anecdotes = useSelector(({ anecdotes, filter }) => {
+    if (filter === '') {
+      return anecdotes
+    }
+    return anecdotes.filter((anecdote) =>
+      anecdote.content.toLowerCase().includes(filter.toLowerCase())
+    )
+  })
 
   // used to dispatch actions to store in order to update state through reducer
   const dispatch = useDispatch()

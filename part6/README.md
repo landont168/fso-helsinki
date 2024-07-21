@@ -13,3 +13,14 @@
 - 6.6 - separate action creator-function into reducer file
 - 6.7 - separate creation of anecdotes into component
 - 6.8 - separate rendering of anecdotes into component
+- 6.9 - implement filtering for anecdotes using `combinedReducers`
+- 6.10 - use Redux Toolkit's `configureStore` to create store; refactor filter reducers and action creators to use `createSlice`
+- 6.11 - refactor anecdote reducerse and action creators to use `createSlice`
+- 6.12 - implement notification functionality with store
+- 6.13 - add timeout for notification component
+- 6.14 - fetch anecdotes from backend implemented using `json-server`
+- 6.15 - modify creation of new anecdotes to be stored in backend
+- 6.16 - modify the initialization of Redux store to use asynchronous action creators, with Redux Thunk
+- 6.17 - modify creation of anecdote to use asynchronous action creators, with Redux Thunk
+- 6.18 - implement voting functionality to be updated in backend, with Redux Thunk
+- 6.19 - modify notification functionality to use single asynchronous action creator

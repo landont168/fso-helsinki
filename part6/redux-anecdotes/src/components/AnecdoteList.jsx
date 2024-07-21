@@ -1,4 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { voteAnecdote } from '../reducers/anecdoteReducer'
+import {
+  setNotification,
+  removeNotification,
+} from '../reducers/notificationReducer'
 
 const AnecdoteList = () => {
   // retrieve filtered anecdotes from store
@@ -11,20 +16,22 @@ const AnecdoteList = () => {
     )
   })
 
-  // used to dispatch actions to store in order to update state through reducer
   const dispatch = useDispatch()
-
   return (
     <div>
-      {anecdotes
+      {[...anecdotes]
         .sort((a, b) => b.votes - a.votes)
         .map((anecdote) => (
           <Anecdote
             key={anecdote.id}
             anecdote={anecdote}
-            handleClick={() =>
-              dispatch({ type: 'VOTE', payload: { id: anecdote.id } })
-            }
+            handleClick={() => {
+              dispatch(voteAnecdote(anecdote.id))
+              dispatch(setNotification(`You voted: "${anecdote.content}"`))
+              setTimeout(() => {
+                dispatch(removeNotification())
+              }, 5000)
+            }}
           />
         ))}
     </div>

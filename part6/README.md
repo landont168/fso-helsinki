@@ -24,3 +24,9 @@
 - 6.17 - modify creation of anecdote to use asynchronous action creators, with Redux Thunk
 - 6.18 - implement voting functionality to be updated in backend, with Redux Thunk
 - 6.19 - modify notification functionality to use single asynchronous action creator
+
+`query-anecdotes`
+
+- 6.20 - implement retrieving anecdotes from server using `react-query`
+- 6.21 - implement adding new anecdotes to server using `react-query`
+- 6.22 - implement voting for anecdotes using `react-query`

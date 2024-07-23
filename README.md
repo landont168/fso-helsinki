@@ -36,3 +36,20 @@
 - `Integration tests` - test backend API functionality (ex. making POST request and verifying response and database changes)
 - `Unit tests` - test frontend components in isolation to ensure they render as expected (ex. testing React component to verify it displays correct content when given specific props)
 - `E2E tests` - test entire application flow to ensure frontend and backend work as expected (ex. simulating user logging in, creating post, verifying post appears on interface)
+
+## Part 6 - Advanced state management
+
+- `Redux` - state management library that uses a central `store` to manage application's state; allows for predictable state changes through `actions` and `reducers`; actions are dispatched to modify the state
+- `useDispatch` - provides React components access to the dispatch function of Redux store; used to send actions to update store
+- `useSelector` - allows React components to fetch data from Redux store
+- `Redux Toolkit` - library that simplifies working with Redux (ex. create stores with less boilerplate code, write reducers and action creators using simpler syntax, handle asynchronous actions with thunk)
+- `configureStore` - simplifies setup of Redux store and reducers
+- `createSlice` - combines reducers and action creators into a single API, returning both action creators and the reducer
+- `action creators` - Set up the action and dispatch to reducer
+- `reducers` - functions that processes actions and updates the state
+- `redux-thunk` - middleware that allows action creators to return functions instead of action objects; functions can handle asychronous operations (ex. fetch data from server) and dispatch action (ex. saving data to store); abstracts server communication away from components
+- `react-query` - used to store and manage data retrieved from server
+- `useReducer` - React hook that manages complex state logic by using a reducer functionto handle state updates in response to dispatched actions
+- `createContext` - used to create a context that components can provide or read
+- `useContext` - used to read and subscribe to context from your component
+- `context` - mechanism for sharing state between components without "prop drilling"

@@ -30,3 +30,5 @@
 - 6.20 - implement retrieving anecdotes from server using `react-query`
 - 6.21 - implement adding new anecdotes to server using `react-query`
 - 6.22 - implement voting for anecdotes using `react-query`
+- 6.23 - implement notification state management using `useReducer` and `useContext` hooks
+- 6.24 - handle failed POST request and display notification

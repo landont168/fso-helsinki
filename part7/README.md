@@ -8,3 +8,11 @@
 - 7.4 - implement `useField` custom hook for field inputs
 - 7.5 - implement reset operation for field inputs
 - 7.6 - fix spread syntax issue by extracting reset function from custom hook
+
+`country-hook`
+
+- 7.7 - create custom hook that fetches data from API endpoint with `useEffect`
+
+`ultimate-hooks`
+
+- 7.8 - create custom hook that communicates with any backend URL

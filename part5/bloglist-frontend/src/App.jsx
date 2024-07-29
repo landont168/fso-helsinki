@@ -9,11 +9,18 @@ import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
+// redux store setup
+import { setNotification } from './reducers/notificationReducer'
+import { useDispatch, useSelector } from 'react-redux'
+
 const App = () => {
+  // redux hooks
+  const dispatch = useDispatch()
+  const notification = useSelector((state) => state.notification)
+
+  // state components
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [notification, setNotification] = useState(null)
-  const [notificationType, setNotificationType] = useState('')
 
   // fetch initial blogs from server
   useEffect(() => {
@@ -38,14 +45,16 @@ const App = () => {
       blogFormRef.current.toggleVisibility()
       const newBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(newBlog))
-      setNotification(`a new blog ${newBlog.title} by ${newBlog.author} added`)
-      setNotificationType('success')
+      dispatch(
+        setNotification(
+          `a new blog ${newBlog.title} by ${newBlog.author} added`
+        )
+      )
     } catch {
-      console.log('error creating blog')
+      dispatch(setNotification('error creating blog'))
     }
     setTimeout(() => {
-      setNotification(null)
-      setNotificationType('')
+      dispatch(setNotification(null))
     }, 5000)
   }
 
@@ -55,15 +64,12 @@ const App = () => {
       window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
       setUser(user)
       blogService.setToken(user.token)
-      setNotification('successful log in')
-      setNotificationType('success')
+      dispatch(setNotification('successful log in'))
     } catch {
-      setNotification('wrong username or password')
-      setNotificationType('error')
+      dispatch(setNotification('wrong username or password'))
     }
     setTimeout(() => {
-      setNotification(null)
-      setNotificationType('')
+      dispatch(setNotification(null))
     }, 5000)
   }
 
@@ -96,7 +102,7 @@ const App = () => {
   if (user === null) {
     return (
       <div>
-        <Notification notification={notification} type={notificationType} />
+        <Notification notification={notification} type={'success'} />
         <LoginForm loginUser={loginUser} />
       </div>
     )
@@ -106,7 +112,7 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <Logout name={user.name} logoutUser={logoutUser} />
-      <Notification notification={notification} type={notificationType} />
+      <Notification notification={notification} type={'success'} />
       <Togglable buttonLabel='create new blog' ref={blogFormRef}>
         <BlogForm addBlog={addBlog} />
       </Togglable>

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import notificationReducer from './reducers/notificationReducer'
 import blogReducer from './reducers/blogReducer'
 import userReducer from './reducers/userReducer'
+import usersReducer from './reducers/usersReducer'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 // redux store
 const store = configureStore({
@@ -12,12 +14,15 @@ const store = configureStore({
     notification: notificationReducer,
     blogs: blogReducer,
     user: userReducer,
+    users: usersReducer,
   },
 })
 
 // provide store to app globally
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <Router>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Router>
 )

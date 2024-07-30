@@ -16,3 +16,11 @@
 `ultimate-hooks`
 
 - 7.8 - create custom hook that communicates with any backend URL
+
+`bloglist-frontend`
+
+- 7.9 - setup Prettier
+- 7.10 - refactor app to use Redux to manage notification data
+- 7.11 - store blogs in Redux store
+- 7.12 - fix like and delete operations to use reducer
+- 7.13 - store user in Redux store

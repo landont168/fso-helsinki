@@ -8,21 +8,28 @@ import LoginForm from './components/LoginForm'
 import Logout from './components/Logout'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
+import Users from './components/Users'
+import User from './components/User'
 
 // backend services
 import blogService from './services/blogs'
 import loginService from './services/login'
+import usersService from './services/users'
 
 // redux store setup
 import { useDispatch, useSelector } from 'react-redux'
 import { setNotification } from './reducers/notificationReducer'
+import { initializeUsers } from './reducers/usersReducer'
 import {
   initializeBlogs,
   addBlog,
   updateBlog,
   deleteBlog,
 } from './reducers/blogReducer'
-import { loginAsyncUser, setUser } from './reducers/userReducer'
+import { setUser } from './reducers/userReducer'
+
+// react router setup
+import { Routes, Route, Link, Navigate, useMatch } from 'react-router-dom'
 
 const App = () => {
   // redux hooks
@@ -30,10 +37,12 @@ const App = () => {
   const notification = useSelector((state) => state.notification)
   const blogs = useSelector((state) => state.blogs)
   const user = useSelector((state) => state.user)
+  const users = useSelector((state) => state.users)
 
   // fetch initial blogs from server
   useEffect(() => {
     dispatch(initializeBlogs())
+    dispatch(initializeUsers())
   }, [dispatch])
 
   // restore user and token from local storage
@@ -112,11 +121,8 @@ const App = () => {
     )
   }
 
-  return (
+  const Home = () => (
     <div>
-      <h2>blogs</h2>
-      <Logout name={user.name} logoutUser={logoutUser} />
-      <Notification notification={notification} type={'success'} />
       <Togglable buttonLabel='create new blog' ref={blogFormRef}>
         <BlogForm addBlog={hanldeAddBlog} />
       </Togglable>
@@ -126,6 +132,20 @@ const App = () => {
         deleteBlog={handleDeleteBlog}
         user={user}
       />
+    </div>
+  )
+
+  return (
+    <div>
+      <h2>blogs</h2>
+      <Logout name={user.name} logoutUser={logoutUser} />
+      <Notification notification={notification} type={'success'} />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/users' element={<Users users={users} />} />
+        <Route path='/users/:id' element={<User />} />
+        <Route path='*' element={<Navigate to='/' />} />
+      </Routes>
     </div>
   )
 }

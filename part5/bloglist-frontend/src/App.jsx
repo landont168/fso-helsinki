@@ -10,6 +10,7 @@ import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import Users from './components/Users'
 import User from './components/User'
+import BlogDisplay from './components/BlogDisplay'
 
 // backend services
 import blogService from './services/blogs'
@@ -144,6 +145,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/users' element={<Users users={users} />} />
         <Route path='/users/:id' element={<User />} />
+        <Route path='/blogs/:id' element={<BlogDisplay />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </div>

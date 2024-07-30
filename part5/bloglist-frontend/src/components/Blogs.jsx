@@ -2,7 +2,7 @@ import Blog from './Blog.jsx'
 
 const Blogs = ({ blogs, updateBlog, deleteBlog, user }) => (
   <div>
-    {blogs
+    {[...blogs]
       .sort((a, b) => b.likes - a.likes)
       .map((blog) => (
         <Blog

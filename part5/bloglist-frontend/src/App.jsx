@@ -1,31 +1,41 @@
 import './index.css'
 import { useState, useEffect, useRef } from 'react'
+
+// react components
 import Blogs from './components/Blogs'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Logout from './components/Logout'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
+
+// backend services
 import blogService from './services/blogs'
 import loginService from './services/login'
 
 // redux store setup
-import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
+import { setNotification } from './reducers/notificationReducer'
+import {
+  setBlogs,
+  addNewBlog,
+  updateNewBlog,
+  removeBlog,
+} from './reducers/blogReducer'
 
 const App = () => {
   // redux hooks
   const dispatch = useDispatch()
   const notification = useSelector((state) => state.notification)
+  const blogs = useSelector((state) => state.blogs)
 
   // state components
-  const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
 
   // fetch initial blogs from server
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs))
-  }, [])
+    blogService.getAll().then((blogs) => dispatch(setBlogs(blogs)))
+  }, [dispatch])
 
   // restore user and token from local storage
   useEffect(() => {
@@ -44,7 +54,7 @@ const App = () => {
     try {
       blogFormRef.current.toggleVisibility()
       const newBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(newBlog))
+      dispatch(addNewBlog(newBlog))
       dispatch(
         setNotification(
           `a new blog ${newBlog.title} by ${newBlog.author} added`
@@ -82,9 +92,7 @@ const App = () => {
   const updateBlog = async (id, blogObject) => {
     try {
       const updatedBlog = await blogService.update(id, blogObject)
-      setBlogs(
-        blogs.map((blog) => (blog.id !== updatedBlog.id ? blog : updatedBlog))
-      )
+      dispatch(updateNewBlog(updatedBlog))
     } catch {
       console.log('error updating blog')
     }
@@ -93,7 +101,7 @@ const App = () => {
   const deleteBlog = async (id) => {
     try {
       await blogService.deleteObject(id)
-      setBlogs(blogs.filter((blog) => blog.id !== id))
+      dispatch(removeBlog(id))
     } catch {
       console.log('error deleting blog')
     }

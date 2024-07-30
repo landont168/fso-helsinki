@@ -53,3 +53,11 @@
 - `createContext` - used to create a context that components can provide or read
 - `useContext` - used to read and subscribe to context from your component
 - `context` - mechanism for sharing state between components without "prop drilling"
+
+## Part 7 - React router, custom hooks, styling app with CSS and webpack
+
+- `react-router` - library for managing navigation in a React app
+- `useParams` - access URL parameter (ex. to fetch specific resource)
+- `useNavigate` - change browser's URL (ex. to render page after login)
+- `useMatch` - access paramaterizied part of path if URL matches (ex. extract ID of resource to fetch actual resource)
+- `custom hooks` - refactor component logic into reusable functions (ex. form field)

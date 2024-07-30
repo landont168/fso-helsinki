@@ -17,10 +17,10 @@ import loginService from './services/login'
 import { useDispatch, useSelector } from 'react-redux'
 import { setNotification } from './reducers/notificationReducer'
 import {
-  setBlogs,
-  addNewBlog,
-  updateNewBlog,
-  removeBlog,
+  initializeBlogs,
+  addBlog,
+  updateBlog,
+  deleteBlog,
 } from './reducers/blogReducer'
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
 
   // fetch initial blogs from server
   useEffect(() => {
-    blogService.getAll().then((blogs) => dispatch(setBlogs(blogs)))
+    dispatch(initializeBlogs())
   }, [dispatch])
 
   // restore user and token from local storage
@@ -50,14 +50,13 @@ const App = () => {
   // creates persistent reference to Togglable component
   const blogFormRef = useRef()
 
-  const addBlog = async (blogObject) => {
+  const hanldeAddBlog = async (blogObject) => {
     try {
       blogFormRef.current.toggleVisibility()
-      const newBlog = await blogService.create(blogObject)
-      dispatch(addNewBlog(newBlog))
+      dispatch(addBlog(blogObject))
       dispatch(
         setNotification(
-          `a new blog ${newBlog.title} by ${newBlog.author} added`
+          `a new blog ${blogObject.title} by ${blogObject.author} added`
         )
       )
     } catch {
@@ -89,19 +88,17 @@ const App = () => {
     blogService.setToken(null)
   }
 
-  const updateBlog = async (id, blogObject) => {
+  const handleUpdateBlog = async (id, blogObject) => {
     try {
-      const updatedBlog = await blogService.update(id, blogObject)
-      dispatch(updateNewBlog(updatedBlog))
+      dispatch(updateBlog(id, blogObject))
     } catch {
       console.log('error updating blog')
     }
   }
 
-  const deleteBlog = async (id) => {
+  const handleDeleteBlog = async (id) => {
     try {
-      await blogService.deleteObject(id)
-      dispatch(removeBlog(id))
+      dispatch(deleteBlog(id))
     } catch {
       console.log('error deleting blog')
     }
@@ -122,12 +119,12 @@ const App = () => {
       <Logout name={user.name} logoutUser={logoutUser} />
       <Notification notification={notification} type={'success'} />
       <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-        <BlogForm addBlog={addBlog} />
+        <BlogForm addBlog={hanldeAddBlog} />
       </Togglable>
       <Blogs
         blogs={blogs}
-        updateBlog={updateBlog}
-        deleteBlog={deleteBlog}
+        updateBlog={handleUpdateBlog}
+        deleteBlog={handleDeleteBlog}
         user={user}
       />
     </div>

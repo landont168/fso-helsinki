@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import blogService from '../services/blogs'
 
+// blog reducer slice
 const blogSlice = createSlice({
   name: 'blogs',
   initialState: [],
@@ -24,6 +26,39 @@ const blogSlice = createSlice({
     },
   },
 })
+
+// fetch blogs from backend
+export const initializeBlogs = () => {
+  return async (dispatch) => {
+    const blogs = await blogService.getAll()
+    dispatch(setBlogs(blogs))
+  }
+}
+
+// add blog to backend
+export const addBlog = (blogObject) => {
+  return async (dispatch) => {
+    const newBlog = await blogService.create(blogObject)
+    dispatch(addNewBlog(newBlog))
+  }
+}
+
+// update blog in backend
+export const updateBlog = (id, blogObject) => {
+  return async (dispatch) => {
+    // updates blog
+    const updatedBlog = await blogService.update(id, blogObject)
+    dispatch(updateNewBlog(updatedBlog))
+  }
+}
+
+// delete blog from backend
+export const deleteBlog = (id) => {
+  return async (dispatch) => {
+    await blogService.deleteObject(id)
+    dispatch(removeBlog(id))
+  }
+}
 
 export const { setBlogs, addNewBlog, updateNewBlog, removeBlog } =
   blogSlice.actions

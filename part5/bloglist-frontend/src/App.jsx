@@ -1,5 +1,5 @@
 import './index.css'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 // react components
 import Blogs from './components/Blogs'
@@ -19,6 +19,7 @@ import loginService from './services/login'
 // redux store setup
 import { useDispatch, useSelector } from 'react-redux'
 import { setNotification } from './reducers/notificationReducer'
+import { setUser } from './reducers/userReducer'
 import { initializeUsers } from './reducers/usersReducer'
 import {
   initializeBlogs,
@@ -26,7 +27,6 @@ import {
   updateBlog,
   deleteBlog,
 } from './reducers/blogReducer'
-import { setUser } from './reducers/userReducer'
 
 // react router setup
 import { Routes, Route, Link, Navigate, useMatch } from 'react-router-dom'
@@ -39,7 +39,7 @@ const App = () => {
   const user = useSelector((state) => state.user)
   const users = useSelector((state) => state.users)
 
-  // fetch initial blogs from server
+  // fetch initial blogs and users from server
   useEffect(() => {
     dispatch(initializeBlogs())
     dispatch(initializeUsers())
@@ -55,7 +55,7 @@ const App = () => {
     }
   }, [dispatch])
 
-  // creates persistent reference to Togglable component
+  // creates persistent reference to toggle component
   const blogFormRef = useRef()
 
   const handleAddBlog = async (blogObject) => {

@@ -16,7 +16,7 @@ const commentsSlice = createSlice({
   },
 })
 
-// fetch blogs from backend
+// fetch comments from backend
 export const initializeComments = (id) => {
   return async (dispatch) => {
     const comments = await blogService.getComments(id)
@@ -24,7 +24,7 @@ export const initializeComments = (id) => {
   }
 }
 
-// add blog to backend
+// add comment to backend
 export const createComment = (id, comment) => {
   return async (dispatch) => {
     await blogService.addComment(id, comment)

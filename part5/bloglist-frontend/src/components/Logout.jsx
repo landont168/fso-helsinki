@@ -1,10 +1,10 @@
 const Logout = ({ name, logoutUser }) => (
-  <div>
+  <span>
     {name} logged in{' '}
     <button id='logout-button' onClick={logoutUser}>
       logout
     </button>
-  </div>
+  </span>
 )
 
 export default Logout

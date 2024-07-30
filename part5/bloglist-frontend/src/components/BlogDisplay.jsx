@@ -12,9 +12,16 @@ const BlogDisplay = () => {
     return null
   }
 
+  const comments = blog.comments
+
   const handleUpdateBlog = () => {
     const blogObject = { ...blog, likes: blog.likes + 1, user: user.id }
     dispatch(updateBlog(blog.id, blogObject))
+  }
+
+  const handleAddComment = () => {
+    // implement comment functionality
+
   }
 
   return (
@@ -28,6 +35,17 @@ const BlogDisplay = () => {
         <button onClick={handleUpdateBlog}>like</button>
       </div>
       <div>added by {blog.user.name}</div>
+
+      <h3>comments</h3>
+      <form onSubmit={handleAddComment}>
+        <input type='text' />
+        <button type='submit'>add comment</button>
+      </form>
+      <ul>
+        {comments.map((comment, index) => (
+          <li key={index}>{comment}</li>
+        ))}
+      </ul>
     </div>
   )
 }

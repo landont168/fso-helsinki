@@ -11,6 +11,7 @@ import Notification from './components/Notification'
 import Users from './components/Users'
 import User from './components/User'
 import BlogDisplay from './components/BlogDisplay'
+import Navbar from './components/Navbar'
 
 // backend services
 import blogService from './services/blogs'
@@ -59,7 +60,7 @@ const App = () => {
   // creates persistent reference to Togglable component
   const blogFormRef = useRef()
 
-  const hanldeAddBlog = async (blogObject) => {
+  const handleAllBlog = async (blogObject) => {
     try {
       blogFormRef.current.toggleVisibility()
       dispatch(addBlog(blogObject))
@@ -125,7 +126,7 @@ const App = () => {
   const Home = () => (
     <div>
       <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-        <BlogForm addBlog={hanldeAddBlog} />
+        <BlogForm addBlog={handleAllBlog} />
       </Togglable>
       <Blogs
         blogs={blogs}
@@ -138,8 +139,8 @@ const App = () => {
 
   return (
     <div>
+      <Navbar user={user} logoutUser={logoutUser} />
       <h2>blogs</h2>
-      <Logout name={user.name} logoutUser={logoutUser} />
       <Notification notification={notification} type={'success'} />
       <Routes>
         <Route path='/' element={<Home />} />

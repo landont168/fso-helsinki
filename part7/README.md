@@ -17,10 +17,16 @@
 
 - 7.8 - create custom hook that communicates with any backend URL
 
-`bloglist-frontend`
+`bloglist`
 
 - 7.9 - setup Prettier
 - 7.10 - refactor app to use Redux to manage notification data
 - 7.11 - store blogs in Redux store
 - 7.12 - fix like and delete operations to use reducer
 - 7.13 - store user in Redux store
+- 7.14 - implement view that displays users
+- 7.15 - implement view for individual users that displays their blog posts
+- 7.16 - implement view for blog posts
+- 7.17 - implement navigation bar
+- 7.18 - implement comment functionality for blog posts
+- 7.19 - implement comment form on frontend

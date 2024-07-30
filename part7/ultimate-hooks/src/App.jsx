@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// field input for form
+// custom hook field input for form
 const useField = (type) => {
   const [value, setValue] = useState('')
 

@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react'
 import Blogs from './components/Blogs'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
-import Logout from './components/Logout'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import Users from './components/Users'
@@ -16,7 +15,6 @@ import Navbar from './components/Navbar'
 // backend services
 import blogService from './services/blogs'
 import loginService from './services/login'
-import usersService from './services/users'
 
 // redux store setup
 import { useDispatch, useSelector } from 'react-redux'
@@ -60,7 +58,7 @@ const App = () => {
   // creates persistent reference to Togglable component
   const blogFormRef = useRef()
 
-  const handleAllBlog = async (blogObject) => {
+  const handleAddBlog = async (blogObject) => {
     try {
       blogFormRef.current.toggleVisibility()
       dispatch(addBlog(blogObject))
@@ -126,7 +124,7 @@ const App = () => {
   const Home = () => (
     <div>
       <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-        <BlogForm addBlog={handleAllBlog} />
+        <BlogForm addBlog={handleAddBlog} />
       </Togglable>
       <Blogs
         blogs={blogs}

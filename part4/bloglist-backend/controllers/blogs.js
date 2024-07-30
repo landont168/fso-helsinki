@@ -88,6 +88,12 @@ blogsRouter.put('/:id', async (request, response) => {
   response.json(updatedBlog)
 })
 
+// get comments for blog post id
+blogsRouter.get('/:id/comments', async (request, response) => {
+  const blog = await Blog.findById(request.params.id)
+  response.json(blog.comments)
+})
+
 // post comments for blog post
 blogsRouter.post('/:id/comments', async (request, response) => {
   const { comment } = request.body

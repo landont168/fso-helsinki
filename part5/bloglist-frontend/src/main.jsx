@@ -6,6 +6,7 @@ import notificationReducer from './reducers/notificationReducer'
 import blogReducer from './reducers/blogReducer'
 import userReducer from './reducers/userReducer'
 import usersReducer from './reducers/usersReducer'
+import commentsReducer from './reducers/commentsReducer'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 // redux store
@@ -15,6 +16,7 @@ const store = configureStore({
     blogs: blogReducer,
     user: userReducer,
     users: usersReducer,
+    comments: commentsReducer,
   },
 })
 

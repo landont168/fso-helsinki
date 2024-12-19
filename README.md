@@ -61,3 +61,9 @@
 - `useNavigate` - change browser's URL (ex. to render page after login)
 - `useMatch` - access paramaterizied part of path if URL matches (ex. extract ID of resource to fetch actual resource)
 - `custom hooks` - refactor component logic into reusable functions (ex. form field)
+
+## Part 9 - TypeScript
+- `TypeScript` - typed superset of JavaScript, eventually compiled to plain JavaScript code
+  - Type annotations - record contract for function/variable (provides type checking + code-level documentation)
+  - Type erasure - removes all type system constructs during compilation (no type information remains at runtime)
+  - Smarter IntelliSense - provides IDEs the type of data you are working with

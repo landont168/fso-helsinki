@@ -1,4 +1,4 @@
-import { isNotNumber } from "./utils";
+import { isNotNumber } from './utils';
 
 // define interface of input object
 interface Input {
@@ -10,7 +10,7 @@ interface Input {
 interface Result {
   periodLength: number;
   trainingDays: number;
-  success: boolean,
+  success: boolean;
   rating: number;
   ratingDescription: string;
   target: number;
@@ -26,7 +26,7 @@ const parseArguments = (args: string[]): Input => {
   }
 
   // add remaning arguments to array
-  const exercises = args.slice(3).map(day => {
+  const exercises = args.slice(3).map((day) => {
     if (isNotNumber(day)) {
       throw new Error('Provided values were not numbers!');
     }
@@ -35,17 +35,25 @@ const parseArguments = (args: string[]): Input => {
 
   return {
     exercises,
-    target
-  }
-}
+    target,
+  };
+};
 
-const calculateExercises = (exercises: Array<number>, target: number): Result => {
+const calculateExercises = (
+  exercises: Array<number>,
+  target: number
+): Result => {
   const periodLength = exercises.length;
-  const trainingDays = exercises.filter(day => day > 0).length;
+  const trainingDays = exercises.filter((day) => day > 0).length;
   const average = exercises.reduce((a, b) => a + b, 0) / periodLength;
   const success = average >= target;
   const rating = success ? 3 : average >= target - 1 ? 2 : 1;
-  const ratingDescription = rating === 3 ? 'Great job!' : rating === 2 ? 'Not too bad but could be better' : 'You need to work harder';
+  const ratingDescription =
+    rating === 3
+      ? 'Great job!'
+      : rating === 2
+      ? 'Not too bad but could be better'
+      : 'You need to work harder';
 
   return {
     periodLength,
@@ -54,18 +62,22 @@ const calculateExercises = (exercises: Array<number>, target: number): Result =>
     rating,
     ratingDescription,
     target,
-    average
+    average,
+  };
+};
+
+// run program with command line arguments
+if (require.main === module) {
+  try {
+    const { exercises, target } = parseArguments(process.argv);
+    console.log(calculateExercises(exercises, target));
+  } catch (error: unknown) {
+    let errorMessage = 'Something bad happened.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    console.log(errorMessage);
   }
 }
 
-// run program with command line arguments
-try {
-  const { exercises, target } = parseArguments(process.argv);
-  console.log(calculateExercises(exercises, target));
-} catch (error: unknown) {
-  let errorMessage = 'Something bad happened.'
-  if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
-  }
-  console.log(errorMessage);
-}
+export { calculateExercises };

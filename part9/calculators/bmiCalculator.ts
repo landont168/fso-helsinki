@@ -1,4 +1,4 @@
-import { isNotNumber } from "./utils";
+import { isNotNumber } from './utils';
 
 interface Input {
   height: number;
@@ -13,12 +13,12 @@ const parseArguments = (args: string[]): Input => {
   if (!isNotNumber(args[2]) && !isNotNumber(args[3])) {
     return {
       height: Number(args[2]),
-      weight: Number(args[3])
-    }
+      weight: Number(args[3]),
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 // height in cm, weight in kg
 const calculateBmi = (height: number, weight: number): string => {
@@ -34,16 +34,20 @@ const calculateBmi = (height: number, weight: number): string => {
   } else {
     return 'Obese';
   }
-}
+};
 
 // run the program with command line arguments
-try {
-  const { height, weight } = parseArguments(process.argv);
-  console.log(calculateBmi(height, weight));
-} catch (error: unknown) {
-  let errorMessage = 'Something bad happened.'
-  if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
+if (require.main === module) {
+  try {
+    const { height, weight } = parseArguments(process.argv);
+    console.log(calculateBmi(height, weight));
+  } catch (error: unknown) {
+    let errorMessage = 'Something bad happened.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
+
+export { calculateBmi };

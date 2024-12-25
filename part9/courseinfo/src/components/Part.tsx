@@ -20,7 +20,6 @@ const Part = ({ part }: { part: CoursePart }) => {
           <em>{part.description}</em>
         </p>
       );
-
     case "group":
       return (
         <p>
@@ -31,7 +30,6 @@ const Part = ({ part }: { part: CoursePart }) => {
           project exercises: {part.groupProjectCount}
         </p>
       );
-
     case "background":
       return (
         <p>

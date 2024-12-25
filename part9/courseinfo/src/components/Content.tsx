@@ -1,16 +1,16 @@
 import { CoursePart } from "../types";
 import Part from "./Part";
 
-const Header = ({ parts }: { parts: CoursePart[] }) => {
+const Content = ({ parts }: { parts: CoursePart[] }) => {
   return (
     <div>
       {parts.map((part) => (
-        <p key={part.name}>
+        <div key={part.name}>
           <Part part={part} />
-        </p>
+        </div>
       ))}
     </div>
   );
 };
 
-export default Header;
+export default Content;

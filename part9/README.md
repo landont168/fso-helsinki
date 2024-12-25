@@ -18,3 +18,11 @@
 - 9.13 - feature safe parsing/validation for POST endpoint
 - 9.14 - refactor request body validation using `Zod`
 
+`courseinfo`
+- 9.15 - setup Typescript frontend
+- 9.16 - use type interfaces and exhaustive type checking
+
+
+
+
+

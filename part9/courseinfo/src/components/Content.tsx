@@ -1,14 +1,12 @@
-interface Part {
-  name: string;
-  exerciseCount: number;
-}
+import { CoursePart } from "../types";
+import Part from "./Part";
 
-const Header = ({ parts }: { parts: Part[] }) => {
+const Header = ({ parts }: { parts: CoursePart[] }) => {
   return (
     <div>
       {parts.map((part) => (
         <p key={part.name}>
-          {part.name} {part.exerciseCount}
+          <Part part={part} />
         </p>
       ))}
     </div>

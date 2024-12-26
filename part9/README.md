@@ -22,6 +22,11 @@
 - 9.15 - setup Typescript frontend
 - 9.16 - use type interfaces and exhaustive type checking
 
+`flight-diary`
+- 9.17 - fetch diaries from backend
+- 9.18 - add diaries to backend
+- 9.19 - display error on frontend
+- 9.20 - improve input validation with HTML form elements
 
 
 
